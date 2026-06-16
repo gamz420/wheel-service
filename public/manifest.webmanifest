@@ -1,0 +1,13 @@
+{
+  "name": "Wheel Service",
+  "short_name": "Wheel Service",
+  "description": "Шиномонтаж, ремонт шин, покраска и восстановление дисков в Махачкале",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#ffd400",
+  "icons": [
+    { "src": "/images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

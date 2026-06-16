@@ -1,0 +1,40 @@
+.heading {
+  max-width: 760px;
+  margin-bottom: clamp(2rem, 5vw, 3.4rem);
+
+  h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+  }
+
+  p {
+    max-width: 680px;
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    line-height: 1.7;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  margin-bottom: 0.9rem;
+  color: var(--yellow);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.center {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+
+  p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

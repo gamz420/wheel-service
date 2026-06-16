@@ -1,0 +1,6 @@
+# Сборка и кэш Next.js
+.next/
+out/
+
+# Зависимости
+node_modules/
