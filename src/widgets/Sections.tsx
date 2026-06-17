@@ -17,6 +17,7 @@ import { SectionHeading } from '@/shared/ui/SectionHeading';
 
 import { BeforeAfterSlider } from './BeforeAfterSlider';
 import { BookingForm } from './BookingForm';
+import { GalleryLightbox } from './GalleryLightbox';
 import styles from './Sections.module.scss';
 
 export function HeroSection() {
@@ -317,17 +318,7 @@ export function GallerySection({ full = false }: { full?: boolean }) {
           title="Реальные диски, реальные цвета, реальные результаты"
           description="В галерее — работы Wheel Service. По фотографии можно выбрать направление цвета и обсудить похожий результат для вашего автомобиля."
         />
-        <div className={styles.galleryGrid}>
-          {works.map((work, index) => (
-            <figure key={work.src} className={index === 0 || index === 5 ? styles.galleryLarge : undefined}>
-              <Image src={work.src} alt={work.alt} fill sizes="(max-width: 700px) 100vw, 33vw" />
-              <figcaption>
-                <span>{work.title}</span>
-                <small>Wheel Service</small>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        <GalleryLightbox works={works} />
         {!full && (
           <div className={styles.sectionAction}>
             <ActionLink href="/works" variant="ghost">

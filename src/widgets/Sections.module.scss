@@ -500,6 +500,7 @@
     inset: 45% 0 0;
     background: linear-gradient(to top, rgb(0 0 0 / 78%), transparent);
     content: '';
+    pointer-events: none;
   }
 
   img {

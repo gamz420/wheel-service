@@ -1,4 +1,10 @@
-export const galleryWorks = [
+export type GalleryWork = {
+  src: string;
+  alt: string;
+  title: string;
+};
+
+export const galleryWorks: GalleryWork[] = [
   {
     src: '/images/work-vw-diamond-cut.webp',
     alt: 'Чёрно-серебристый диск Volkswagen после покраски и алмазной проточки',
