@@ -61,6 +61,9 @@ export function Footer() {
       <div className={`container ${styles.bottom}`}>
         <span>© {new Date().getFullYear()} Wheel Service</span>
         <span>Цены на сайте не являются публичной офертой.</span>
+        <a className={styles.creator} href="https://t.me/gamzalievgamz" target="_blank" rel="noreferrer">
+          Создание сайта: gamzalievgamz
+        </a>
       </div>
     </footer>
   );
