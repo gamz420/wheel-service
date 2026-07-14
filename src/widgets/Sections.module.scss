@@ -782,6 +782,9 @@
     font-size: clamp(2.8rem, 6vw, 6rem);
     line-height: 0.98;
     letter-spacing: -0.06em;
+    hyphens: auto;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
   p {
@@ -1001,5 +1004,12 @@
   .contactActions > a,
   .pageHeroActions > a {
     width: 100%;
+  }
+}
+
+@media (max-width: 455px) {
+  .pageHero h1 {
+    font-size: clamp(2.35rem, 12vw, 2.8rem);
+    letter-spacing: -0.035em;
   }
 }
