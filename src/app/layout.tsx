@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 
+import { servicePages } from '@/entities/service/data';
 import { siteConfig } from '@/shared/config/site';
 import { Analytics } from '@/widgets/Analytics';
 import { Footer } from '@/widgets/Footer';
@@ -60,6 +61,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'AutomotiveBusiness',
+    '@id': `${siteUrl}/#business`,
+    url: siteUrl,
     name: siteConfig.name,
     description: siteConfig.description,
     image: `${siteUrl}/images/og-wheel-service.jpg`,
@@ -77,8 +80,43 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       latitude: siteConfig.coordinates.latitude,
       longitude: siteConfig.coordinates.longitude,
     },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '09:00',
+        closes: '21:00',
+      },
+    ],
+    contactPoint: siteConfig.phones.map((phone) => ({
+      '@type': 'ContactPoint',
+      telephone: `+${phone.value}`,
+      contactType: 'customer service',
+      areaServed: 'RU-DA',
+      availableLanguage: 'ru',
+    })),
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Махачкала',
+      },
+      {
+        '@type': 'Place',
+        name: 'Хушет',
+      },
+    ],
     hasMap: siteConfig.mapUrl,
     sameAs: [`https://t.me/${siteConfig.telegram}`],
+    makesOffer: servicePages.map((service) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: service.title,
+        description: service.description,
+        areaServed: 'Махачкала и Хушет',
+        url: `${siteUrl}/services/${service.slug}`,
+      },
+    })),
   };
 
   return (

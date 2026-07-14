@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { servicePages } from '@/entities/service/data';
-import { whatsappHref } from '@/shared/config/site';
+import { siteConfig, whatsappHref } from '@/shared/config/site';
 import { ActionLink } from '@/shared/ui/ActionLink';
 import { Icon } from '@/shared/ui/Icon';
 import { ContactSection, PageHero } from '@/widgets/Sections';
@@ -12,6 +12,8 @@ import styles from './service.module.scss';
 type Props = {
   params: { slug: string };
 };
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
 export function generateStaticParams() {
   return servicePages.map((service) => ({ slug: service.slug }));
@@ -38,6 +40,58 @@ export default function ServicePage({ params }: Props) {
   const service = servicePages.find((item) => item.slug === params.slug);
 
   if (!service) notFound();
+
+  const serviceUrl = `${siteUrl}/services/${service.slug}`;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Service',
+        '@id': `${serviceUrl}#service`,
+        name: service.title,
+        description: service.description,
+        provider: {
+          '@type': 'AutomotiveBusiness',
+          '@id': `${siteUrl}/#business`,
+          name: siteConfig.name,
+          telephone: siteConfig.phones.map((phone) => `+${phone.value}`),
+          address: siteConfig.address,
+        },
+        areaServed: ['Махачкала', 'Хушет'],
+        serviceType: service.title,
+        url: serviceUrl,
+        offers: {
+          '@type': 'Offer',
+          availability: 'https://schema.org/InStock',
+          priceCurrency: 'RUB',
+          url: serviceUrl,
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Главная',
+            item: siteUrl,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Услуги',
+            item: `${siteUrl}/services`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: service.title,
+            item: serviceUrl,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <>
@@ -68,6 +122,10 @@ export default function ServicePage({ params }: Props) {
         </div>
       </section>
       <ContactSection />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
     </>
   );
 }

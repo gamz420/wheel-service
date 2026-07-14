@@ -8,6 +8,7 @@ import styles from './privacy.module.scss';
 export const metadata: Metadata = {
   title: 'Политика конфиденциальности',
   description: 'Информация об обработке данных при обращении через сайт Wheel Service.',
+  alternates: { canonical: '/privacy' },
   robots: { index: false, follow: true },
 };
 
